@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- TODO: title/description под узкие ключи (ТЗ §5.5): «бухгалтер для нового ИП» и т.п. -->
+  <title>Наша компания больше, чем бухгалтерия!</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- TODO: Schema.org Organization/LocalBusiness + FAQPage (ТЗ §5.5) -->
+  <!-- TODO: Яндекс.Метрика (id от заказчика) -->
+</head>
+<body>
+  <!-- 1. Hero: слоган, подзаголовок, CTA, телефон, 24/7 -->
+  <header class="hero" id="hero">
+    <!-- TODO: контент hero -->
+  </header>
+
+  <main>
+    <!-- 2. Боли клиента -->
+    <section id="pain"><!-- TODO --></section>
+
+    <!-- 3. Услуги (ТЗ §5.3) -->
+    <section id="services"><!-- TODO --></section>
+
+    <!-- 4. Акцент на старте бизнеса (открываю ИП/ООО) -->
+    <section id="startup"><!-- TODO --></section>
+
+    <!-- 5. Блок для зарубежных клиентов (Черногория/Армения) — ждём контент от заказчика -->
+    <section id="abroad"><!-- TODO --></section>
+
+    <!-- 6. Почему мы / доверие -->
+    <section id="trust"><!-- TODO --></section>
+
+    <!-- 7. FAQ + разметка Schema.org FAQPage -->
+    <section id="faq"><!-- TODO --></section>
+
+    <!-- 8. Форма заявки -->
+    <section id="lead">
+      <h2>Оставить заявку</h2>
+      <form id="lead-form" novalidate>
+        <input type="text" name="name" placeholder="Имя" required>
+        <input type="tel" name="phone" placeholder="Телефон" required>
+        <textarea name="message" placeholder="Коротко о задаче (необязательно)"></textarea>
+        <!-- honeypot: скрытое поле, люди его не заполняют -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off"
+               style="position:absolute;left:-9999px" aria-hidden="true">
+        <label class="consent">
+          <input type="checkbox" name="consent" required>
+          Согласен на обработку персональных данных
+          (<a href="privacy.html">политика</a>)
+        </label>
+        <button type="submit">Отправить</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <!-- 9. Контакты + соцсети + футер -->
+  <footer id="contacts">
+    <!-- TODO: телефон, e-mail, соцсети, ссылка на политику ПД, номер в реестре операторов ПД -->
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
