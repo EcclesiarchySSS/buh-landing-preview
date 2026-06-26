@@ -3,63 +3,232 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- TODO: title/description под узкие ключи (ТЗ §5.5): «бухгалтер для нового ИП» и т.п. -->
-  <title>Наша компания больше, чем бухгалтерия!</title>
-  <meta name="description" content="">
+
+  <!-- SEO: узкие ключи под старт бизнеса (ТЗ §5.5). TODO: подставить домен в canonical/og:url -->
+  <title>Бухгалтер для нового ИП и ООО — сопровождение бизнеса с нуля</title>
+  <meta name="description" content="Персональный аудитор для нового и действующего бизнеса: регистрация ИП и ООО, ведение учёта (УСН, ОСНО, ПСН), отчётность, ответы на требования ФНС. На связи 24/7. Ростов-на-Дону и удалённо по РФ и за рубежом.">
+  <link rel="canonical" href="https://example.ru/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Наша компания больше, чем бухгалтерия!">
+  <meta property="og:description" content="Сопровождение ИП и ООО с первого дня. Персональный аудитор, гарантия правильности отчётности, на связи 24/7.">
+  <meta property="og:url" content="https://example.ru/">
+  <meta property="og:locale" content="ru_RU">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="css/styles.css">
-  <!-- TODO: Schema.org Organization/LocalBusiness + FAQPage (ТЗ §5.5) -->
-  <!-- TODO: Яндекс.Метрика (id от заказчика) -->
+
+  <!-- Организация для поиска и нейроответов (ТЗ §5.5). TODO: уточнить адрес, соцсети, лого -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "name": "Больше, чем бухгалтерия",
+    "description": "Бухгалтерские и аудиторские услуги: регистрация и сопровождение ИП и ООО, ведение учёта, отчётность, аудит.",
+    "telephone": "+7-918-500-48-50",
+    "email": "delo2025@bk.ru",
+    "areaServed": ["RU", "ME", "AM"],
+    "address": { "@type": "PostalAddress", "addressLocality": "Ростов-на-Дону", "addressCountry": "RU" },
+    "foundingDate": "2010",
+    "url": "https://example.ru/"
+  }
+  </script>
+
+  <!-- FAQ для нейроответов Яндекс/Алисы и Google (ТЗ §5.5) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Нужен ли бухгалтер сразу после открытия ИП?",
+        "acceptedAnswer": { "@type": "Answer", "text": "На старте — да, хотя бы как консультант. Ошибка с выбором системы налогообложения или пропуск первого отчёта оборачиваются штрафами и блокировкой счёта. Мы помогаем с первого дня: выбираем режим, ставим учёт и берём отчётность на себя, чтобы вы занимались бизнесом, а не налогами." } },
+      { "@type": "Question", "name": "Какую систему налогообложения выбрать новому ИП?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Зависит от вида деятельности, оборота и расходов. Чаще всего новым ИП подходит УСН «Доходы» или патент (ПСН), реже — УСН «Доходы минус расходы» или ОСНО. Мы считаем налоговую нагрузку под вашу ситуацию и подсказываем самый выгодный режим до того, как вы подадите документы." } },
+      { "@type": "Question", "name": "Что делать, если пришло требование от ФНС?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Не игнорировать — у требований жёсткие сроки ответа, а молчание ведёт к штрафам и блокировке счёта. Пришлите нам требование: разберём, подготовим пояснения и документы, при необходимости — возражения на акт проверки. Берём общение с налоговой на себя." } },
+      { "@type": "Question", "name": "Сколько стоит бухгалтерское сопровождение?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Стоимость зависит от формы бизнеса, системы налогообложения и числа операций. Мы считаем индивидуально и называем фиксированную сумму заранее, без скрытых доплат. Оставьте заявку — подберём решение под ваш объём." } },
+      { "@type": "Question", "name": "Я веду бизнес из-за рубежа — можете вести мой учёт удалённо?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Да. Работаем полностью удалённо с гражданами РФ, которые живут за границей, в том числе в Черногории и Армении. Документы и отчётность ведём онлайн, на связи в удобном вам часовом поясе. Российский бизнес и отчётность остаются в порядке, где бы вы ни находились." } },
+      { "@type": "Question", "name": "Чем грозит несвоевременная сдача отчётности?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Штрафами от ФНС и фондов, пенями, а при просрочке более 20 дней — блокировкой расчётного счёта. У ООО возможна и ответственность директора. Мы ведём календарь отчётности и сдаём всё в срок, чтобы вы не попадали на штрафы." } },
+      { "@type": "Question", "name": "Вы работаете удалённо или нужно приезжать в офис?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Полностью удалённо по всей России и для клиентов за рубежом. Документы передаются онлайн, консультации — по телефону, в Telegram или мессенджерах. Личная встреча возможна в Ростове-на-Дону, но не обязательна." } }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <!-- 1. Hero: слоган, подзаголовок, CTA, телефон, 24/7 -->
-  <header class="hero" id="hero">
-    <!-- TODO: контент hero -->
+  <!-- Слой поп-арт текстуры (полутоновые точки) -->
+  <div class="bg-dots" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#hero">
+      <span class="brand-mark">Б</span>
+      <span class="brand-name">больше,<br>чем бухгалтерия</span>
+    </a>
+    <a class="btn btn-sm" href="#lead">Оставить заявку</a>
   </header>
 
   <main>
-    <!-- 2. Боли клиента -->
-    <section id="pain"><!-- TODO --></section>
+    <!-- 1. HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-inner reveal-group">
+        <p class="kicker reveal">Персональный аудитор · на связи 24/7</p>
+        <h1 class="hero-title reveal">Наша компания <span class="hl">больше,</span> чем бухгалтерия!</h1>
+        <p class="hero-sub reveal">Гарантируем правильность всей финансовой отчётности. Берём на себя налоги, учёт и общение с ФНС — вы занимаетесь бизнесом.</p>
+        <div class="hero-cta reveal">
+          <a class="btn btn-lg" href="#lead">Оставить заявку</a>
+          <!-- TODO: подставить @username бота -->
+          <a class="btn btn-lg btn-ghost" href="https://t.me/your_bot_username" target="_blank" rel="noopener">Написать в Telegram</a>
+        </div>
+        <div class="hero-meta reveal">
+          <a class="phone" href="tel:+79185004850">+7 918 500 48 50</a>
+          <span class="badge-247">24/7</span>
+        </div>
+      </div>
+    </section>
 
-    <!-- 3. Услуги (ТЗ §5.3) -->
-    <section id="services"><!-- TODO --></section>
+    <!-- 2. БОЛИ -->
+    <section class="pain" id="pain">
+      <div class="container reveal-group">
+        <p class="pain-q reveal">Вы предприниматель, и у вас нет времени и желания разбираться в&nbsp;хитростях налогового законодательства?</p>
+        <p class="pain-a reveal">Тогда обращайтесь к&nbsp;нам!</p>
+      </div>
+    </section>
 
-    <!-- 4. Акцент на старте бизнеса (открываю ИП/ООО) -->
-    <section id="startup"><!-- TODO --></section>
+    <!-- 3. УСЛУГИ -->
+    <section class="services" id="services">
+      <div class="container">
+        <h2 class="section-title reveal">Что мы делаем</h2>
+        <ul class="cards reveal-group">
+          <li class="card reveal"><span class="card-no">01</span><h3>Регистрация и ликвидация</h3><p>Открытие и закрытие ООО и ИП — под ключ, без походов по инстанциям.</p></li>
+          <li class="card reveal"><span class="card-no">02</span><h3>Ведение бухучёта</h3><p>Любая сложность и сфера: ОСНО, УСН, ПСН. Полное сопровождение.</p></li>
+          <li class="card reveal"><span class="card-no">03</span><h3>3-НДФЛ для физлиц</h3><p>Подготовка и сдача деклараций, возврат и вычеты.</p></li>
+          <li class="card reveal"><span class="card-no">04</span><h3>Налоговые требования</h3><p>Ответы на требования, пояснения, разногласия к актам проверок.</p></li>
+          <li class="card reveal"><span class="card-no">05</span><h3>Кадровый и воинский учёт</h3><p>Ведём документы по сотрудникам и воинский учёт за вас.</p></li>
+          <li class="card reveal"><span class="card-no">06</span><h3>Внутренний аудит</h3><p>Проверка ООО и ИП, оценка состояния учёта, аудит рабочих мест.</p></li>
+          <li class="card reveal"><span class="card-no">07</span><h3>Управленческий учёт</h3><p>Постановка и внедрение — чтобы видеть реальные цифры бизнеса.</p></li>
+          <li class="card reveal"><span class="card-no">08</span><h3>Консультации</h3><p>Бухучёт, налоги, а также опытный юрист: гражданское, налоговое, административное право.</p></li>
+        </ul>
+      </div>
+    </section>
 
-    <!-- 5. Блок для зарубежных клиентов (Черногория/Армения) — ждём контент от заказчика -->
-    <section id="abroad"><!-- TODO --></section>
+    <!-- 4. СТАРТ БИЗНЕСА -->
+    <section class="startup" id="startup">
+      <div class="container startup-inner reveal-group">
+        <div class="reveal">
+          <h2 class="section-title">Открываете ИП или&nbsp;ООО?</h2>
+          <p class="lead">Сопровождаем с&nbsp;первого дня. Поможем не наделать дорогих ошибок на старте, когда каждое решение влияет на налоги впереди.</p>
+        </div>
+        <ol class="steps reveal">
+          <li><b>Выберем режим.</b> Посчитаем налоговую нагрузку и подскажем самый выгодный.</li>
+          <li><b>Зарегистрируем.</b> Подготовим документы и подадим — без вашей беготни.</li>
+          <li><b>Поставим учёт.</b> Настроим всё так, чтобы отчётность шла как часы.</li>
+          <li><b>Будем рядом.</b> Отвечаем на вопросы и держим связь 24/7.</li>
+        </ol>
+      </div>
+    </section>
 
-    <!-- 6. Почему мы / доверие -->
-    <section id="trust"><!-- TODO --></section>
+    <!-- 5. ДЛЯ ТЕХ, КТО ЗА РУБЕЖОМ -->
+    <!-- TODO: уточнить у заказчика конкретику услуг для Черногории/Армении (ТЗ §12 п.6) -->
+    <section class="abroad" id="abroad">
+      <div class="container reveal-group">
+        <h2 class="section-title reveal">Живёте за рубежом, а&nbsp;бизнес в&nbsp;России?</h2>
+        <p class="lead reveal">Ведём учёт и отчётность полностью удалённо для граждан РФ в&nbsp;Черногории, Армении и&nbsp;других странах. Российская отчётность остаётся в&nbsp;порядке, где&nbsp;бы вы ни&nbsp;были — на связи в&nbsp;вашем часовом поясе.</p>
+      </div>
+    </section>
 
-    <!-- 7. FAQ + разметка Schema.org FAQPage -->
-    <section id="faq"><!-- TODO --></section>
+    <!-- 6. ПОЧЕМУ МЫ -->
+    <section class="trust" id="trust">
+      <div class="container">
+        <h2 class="section-title reveal">Почему нам доверяют</h2>
+        <div class="stats reveal-group">
+          <div class="stat reveal"><span class="stat-num">с 2010</span><span class="stat-cap">на рынке бухуслуг</span></div>
+          <div class="stat reveal"><span class="stat-num">24/7</span><span class="stat-cap">на связи без выходных</span></div>
+          <div class="stat reveal"><span class="stat-num">1 аудитор</span><span class="stat-cap">персонально ведёт вас</span></div>
+          <div class="stat reveal"><span class="stat-num">100%</span><span class="stat-cap">гарантия правильности отчётности</span></div>
+        </div>
+        <!-- TODO: блок отзывов — если заказчик предоставит (ТЗ §12 п.5) -->
+      </div>
+    </section>
 
-    <!-- 8. Форма заявки -->
-    <section id="lead">
-      <h2>Оставить заявку</h2>
-      <form id="lead-form" novalidate>
-        <input type="text" name="name" placeholder="Имя" required>
-        <input type="tel" name="phone" placeholder="Телефон" required>
-        <textarea name="message" placeholder="Коротко о задаче (необязательно)"></textarea>
-        <!-- honeypot: скрытое поле, люди его не заполняют -->
-        <input type="text" name="website" tabindex="-1" autocomplete="off"
-               style="position:absolute;left:-9999px" aria-hidden="true">
-        <label class="consent">
-          <input type="checkbox" name="consent" required>
-          Согласен на обработку персональных данных
-          (<a href="privacy.html">политика</a>)
-        </label>
-        <button type="submit">Отправить</button>
-        <p class="form-status" role="status"></p>
-      </form>
+    <!-- 7. FAQ -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <h2 class="section-title reveal">Частые вопросы</h2>
+        <div class="faq-list reveal-group">
+          <details class="faq-item reveal"><summary>Нужен ли бухгалтер сразу после открытия ИП?</summary><div class="faq-body"><p>На старте — да, хотя бы как консультант. Ошибка с выбором системы налогообложения или пропуск первого отчёта оборачиваются штрафами и блокировкой счёта. Мы помогаем с первого дня: выбираем режим, ставим учёт и берём отчётность на себя.</p></div></details>
+          <details class="faq-item reveal"><summary>Какую систему налогообложения выбрать новому ИП?</summary><div class="faq-body"><p>Зависит от вида деятельности, оборота и расходов. Чаще подходит УСН «Доходы» или патент, реже — УСН «Доходы минус расходы» или ОСНО. Считаем налоговую нагрузку под вашу ситуацию до подачи документов.</p></div></details>
+          <details class="faq-item reveal"><summary>Что делать, если пришло требование от ФНС?</summary><div class="faq-body"><p>Не игнорировать — у требований жёсткие сроки, а молчание ведёт к штрафам и блокировке счёта. Пришлите требование нам: подготовим пояснения и документы, при необходимости — возражения на акт. Общение с налоговой берём на себя.</p></div></details>
+          <details class="faq-item reveal"><summary>Сколько стоит бухгалтерское сопровождение?</summary><div class="faq-body"><p>Зависит от формы бизнеса, режима налогообложения и числа операций. Считаем индивидуально и называем фиксированную сумму заранее, без скрытых доплат. Оставьте заявку — подберём решение под ваш объём.</p></div></details>
+          <details class="faq-item reveal"><summary>Веду бизнес из-за рубежа — можете вести учёт удалённо?</summary><div class="faq-body"><p>Да. Работаем полностью удалённо с гражданами РФ за границей, в том числе в Черногории и Армении. Документы и отчётность ведём онлайн, на связи в удобном вам часовом поясе.</p></div></details>
+          <details class="faq-item reveal"><summary>Чем грозит несвоевременная сдача отчётности?</summary><div class="faq-body"><p>Штрафами и пенями, а при просрочке свыше 20 дней — блокировкой счёта; у ООО возможна ответственность директора. Мы ведём календарь отчётности и сдаём всё в срок.</p></div></details>
+          <details class="faq-item reveal"><summary>Вы работаете удалённо или нужно приезжать в офис?</summary><div class="faq-body"><p>Полностью удалённо по всей России и для клиентов за рубежом. Документы — онлайн, консультации по телефону и в Telegram. Личная встреча возможна в Ростове-на-Дону, но не обязательна.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ФОРМА ЗАЯВКИ -->
+    <section class="lead-section" id="lead">
+      <div class="container">
+        <div class="lead-card reveal-group">
+          <h2 class="section-title reveal">Оставьте заявку</h2>
+          <p class="lead reveal">Екатерина свяжется с&nbsp;вами и&nbsp;подберёт решение. Это бесплатно и&nbsp;ни&nbsp;к&nbsp;чему не&nbsp;обязывает.</p>
+          <form id="lead-form" class="reveal" novalidate>
+            <label class="field">
+              <span>Имя</span>
+              <input type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" required>
+            </label>
+            <label class="field">
+              <span>Телефон</span>
+              <input type="tel" name="phone" autocomplete="tel" placeholder="+7 ___ ___ __ __" required>
+            </label>
+            <label class="field">
+              <span>Коротко о задаче <i>(необязательно)</i></span>
+              <textarea name="message" rows="3" placeholder="Например: открываю ИП, нужна помощь с выбором налога"></textarea>
+            </label>
+            <!-- honeypot: скрытое поле, люди его не заполняют -->
+            <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+            <label class="consent">
+              <input type="checkbox" name="consent" required>
+              <span>Согласен на обработку персональных данных (<a href="privacy.html">политика</a>)</span>
+            </label>
+            <button type="submit" class="btn btn-lg">Отправить заявку</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
     </section>
   </main>
 
-  <!-- 9. Контакты + соцсети + футер -->
-  <footer id="contacts">
-    <!-- TODO: телефон, e-mail, соцсети, ссылка на политику ПД, номер в реестре операторов ПД -->
+  <!-- 9. ФУТЕР -->
+  <footer class="footer" id="contacts">
+    <div class="container footer-grid">
+      <div>
+        <p class="footer-slogan">Больше, чем бухгалтерия</p>
+        <p class="footer-sub">Персональный аудитор · Ростов-на-Дону и удалённо</p>
+      </div>
+      <div class="footer-contacts">
+        <a href="tel:+79185004850">+7 918 500 48 50</a>
+        <a href="mailto:delo2025@bk.ru">delo2025@bk.ru</a>
+        <span>На связи 24 часа в сутки</span>
+      </div>
+      <div class="footer-social">
+        <!-- TODO: подставить реальные ссылки соцсетей (ТЗ §12 п.9) -->
+        <a href="#" rel="noopener">Telegram</a>
+        <a href="#" rel="noopener">Instagram</a>
+        <a href="#" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="container footer-legal">
+      <a href="privacy.html">Политика обработки персональных данных</a>
+      <!-- TODO: подставить номер в реестре операторов ПД (ТЗ §12 п.11) -->
+      <span>Оператор ПД в реестре Роскомнадзора: № ________</span>
+    </div>
   </footer>
+
+  <!-- TODO: Яндекс.Метрика — подставить counter id от заказчика (ТЗ §5.5) + баннер cookie -->
 
   <script src="js/main.js"></script>
 </body>

@@ -1,4 +1,26 @@
-// Отправка формы заявки на бэкенд: POST /api/lead → подтверждение пользователю.
+// --- Появление секций при скролле: split & stagger ---
+// Каждой .reveal внутри группы задаём порядковый индекс для каскадной задержки,
+// затем включаем класс .in, когда группа попадает в зону видимости.
+document.querySelectorAll(".reveal-group").forEach((group) => {
+  group.querySelectorAll(".reveal").forEach((el, i) => el.style.setProperty("--i", i));
+});
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        entry.target.querySelectorAll?.(".reveal").forEach((el) => el.classList.add("in"));
+        observer.unobserve(entry.target);
+      }
+    }
+  },
+  { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+);
+
+document.querySelectorAll(".reveal-group, .reveal").forEach((el) => observer.observe(el));
+
+// --- Отправка формы заявки: POST /api/lead → подтверждение пользователю ---
 const form = document.getElementById("lead-form");
 const status = form.querySelector(".form-status");
 
@@ -9,7 +31,10 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  const button = form.querySelector("button[type=submit]");
+  button.disabled = true;
   status.textContent = "Отправляем…";
+
   try {
     const res = await fetch("/api/lead", { method: "POST", body: new FormData(form) });
     const data = await res.json();
@@ -21,5 +46,7 @@ form.addEventListener("submit", async (e) => {
     }
   } catch {
     status.textContent = "Не удалось отправить. Попробуйте позже или напишите в Telegram.";
+  } finally {
+    button.disabled = false;
   }
 });
