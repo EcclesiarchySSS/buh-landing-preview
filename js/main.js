@@ -50,3 +50,40 @@ form.addEventListener("submit", async (e) => {
     button.disabled = false;
   }
 });
+
+// --- Cookie-согласие + отложенная загрузка Яндекс.Метрики (152-ФЗ) ---
+// Метрику грузим ТОЛЬКО после согласия пользователя. На превью счётчика нет —
+// при null загрузка пропускается, ошибок не будет.
+// TODO ЗАКАЗЧИК: подставить id счётчика Яндекс.Метрики (ТЗ §5.5).
+const YM_COUNTER_ID = null;
+const CONSENT_KEY = "cookie-consent";
+const banner = document.getElementById("cookie-banner");
+
+function loadMetrika() {
+  if (!YM_COUNTER_ID) return;
+  (function (m, e, t, r, i, k, a) {
+    m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+    m[i].l = 1 * new Date();
+    k = e.createElement(t); a = e.getElementsByTagName(t)[0];
+    k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+  })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+  window.ym(YM_COUNTER_ID, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true });
+}
+
+if (banner) {
+  const consent = localStorage.getItem(CONSENT_KEY);
+  if (consent === "all") {
+    loadMetrika();
+  } else if (!consent) {
+    banner.hidden = false;
+  }
+  banner.querySelector("#cookie-accept")?.addEventListener("click", () => {
+    localStorage.setItem(CONSENT_KEY, "all");
+    banner.hidden = true;
+    loadMetrika();
+  });
+  banner.querySelector("#cookie-decline")?.addEventListener("click", () => {
+    localStorage.setItem(CONSENT_KEY, "necessary");
+    banner.hidden = true;
+  });
+}

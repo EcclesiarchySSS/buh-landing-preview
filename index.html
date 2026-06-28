@@ -58,6 +58,8 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#hero">Перейти к содержимому</a>
+
   <header class="topbar">
     <a class="brand" href="#hero">
       <span class="brand-mark">Б</span>
@@ -276,7 +278,14 @@
     </div>
   </footer>
 
-  <!-- TODO: Яндекс.Метрика — подставить counter id от заказчика (ТЗ §5.5) + баннер cookie -->
+  <!-- Cookie-согласие (показывается, пока выбор не сделан). Метрика грузится после «Принять». -->
+  <div class="cookie" id="cookie-banner" role="dialog" aria-label="Согласие на использование cookie" hidden>
+    <p class="cookie-text">Мы используем cookie и веб-аналитику, чтобы улучшать сайт. Продолжая, вы соглашаетесь с <a href="privacy.html">политикой обработки персональных данных</a>.</p>
+    <div class="cookie-actions">
+      <button type="button" class="btn btn-sm" id="cookie-accept">Принять</button>
+      <button type="button" class="btn btn-sm btn-ghost" id="cookie-decline">Только необходимые</button>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>
