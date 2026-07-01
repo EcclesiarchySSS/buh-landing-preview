@@ -40,7 +40,7 @@ form.addEventListener("submit", async (e) => {
     const data = await res.json();
     if (data.ok) {
       form.reset();
-      status.textContent = "Заявка отправлена! Екатерина свяжется с вами в ближайшее время.";
+      status.textContent = "Заявка отправлена! Наш специалист свяжется с вами в ближайшее время.";
     } else {
       status.textContent = "Проверьте имя и телефон и попробуйте ещё раз.";
     }
