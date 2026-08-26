@@ -27,12 +27,14 @@ const status = form.querySelector(".form-status");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!form.consent.checked) {
+    status.className = "form-status err";
     status.textContent = "Нужно согласие на обработку персональных данных.";
     return;
   }
 
   const button = form.querySelector("button[type=submit]");
   button.disabled = true;
+  status.className = "form-status";
   status.textContent = "Отправляем…";
 
   try {
@@ -40,11 +42,14 @@ form.addEventListener("submit", async (e) => {
     const data = await res.json();
     if (data.ok) {
       form.reset();
+      status.className = "form-status ok";
       status.textContent = "Заявка отправлена! Наш специалист свяжется с вами в ближайшее время.";
     } else {
+      status.className = "form-status err";
       status.textContent = "Проверьте имя и телефон и попробуйте ещё раз.";
     }
   } catch {
+    status.className = "form-status err";
     status.textContent = "Не удалось отправить. Попробуйте позже или напишите в Telegram.";
   } finally {
     button.disabled = false;
