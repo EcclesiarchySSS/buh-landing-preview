@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# TODO: подставить реальный домен
-Sitemap: https://example.ru/sitemap.xml
+Sitemap: https://taxbuh.com/sitemap.xml
