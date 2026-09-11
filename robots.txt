@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
 
-# презентационная версия направления «Ведомость» — не для индекса
-Disallow: /vedomost/
-
 Sitemap: https://taxbuh.com/sitemap.xml

@@ -1,63 +1,67 @@
-// --- Появление секций при скролле: split & stagger ---
-// Каждой .reveal внутри группы задаём порядковый индекс для каскадной задержки,
-// затем включаем класс .in, когда группа попадает в зону видимости.
-document.querySelectorAll(".reveal-group").forEach((group) => {
-  group.querySelectorAll(".reveal").forEach((el, i) => el.style.setProperty("--i", i));
-});
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in");
-        entry.target.querySelectorAll?.(".reveal").forEach((el) => el.classList.add("in"));
-        observer.unobserve(entry.target);
-      }
-    }
-  },
-  { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
-);
-
-document.querySelectorAll(".reveal-group, .reveal").forEach((el) => observer.observe(el));
-
-// --- Отправка формы заявки: POST /api/lead → подтверждение пользователю ---
+// --- Заявка: проверка полей → POST /api/lead → ответ пользователю ---
+// Бэкенд (backend/app.py) пишет заявку в SQLite и шлёт аудитору в Telegram.
+// На превью (GitHub Pages) бэкенда нет — сработает ветка «напишите в Telegram».
 const form = document.getElementById("lead-form");
 const status = form.querySelector(".form-status");
+const button = form.querySelector("button[type=submit]");
+
+function setStatus(text, kind) {
+  status.className = "form-status mono" + (kind ? " " + kind : "");
+  status.textContent = text;
+}
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  if (!form.name.value.trim()) {
+    setStatus("УКАЖИТЕ ИМЯ", "err");
+    form.name.focus();
+    return;
+  }
+  if (form.phone.value.replace(/\D/g, "").length < 10) {
+    setStatus("УКАЖИТЕ ТЕЛЕФОН", "err");
+    form.phone.focus();
+    return;
+  }
   if (!form.consent.checked) {
-    status.className = "form-status err";
-    status.textContent = "Нужно согласие на обработку персональных данных.";
+    setStatus("НУЖНО СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ", "err");
     return;
   }
 
-  const button = form.querySelector("button[type=submit]");
   button.disabled = true;
-  status.className = "form-status";
-  status.textContent = "Отправляем…";
+  setStatus("ОТПРАВЛЯЕМ…");
 
   try {
     const res = await fetch("/api/lead", { method: "POST", body: new FormData(form) });
     const data = await res.json();
     if (data.ok) {
       form.reset();
-      status.className = "form-status ok";
-      status.textContent = "Заявка отправлена! Наш специалист свяжется с вами в ближайшее время.";
+      setStatus("ЗАЯВКА ОТПРАВЛЕНА — НАШ СПЕЦИАЛИСТ СВЯЖЕТСЯ С ВАМИ В БЛИЖАЙШЕЕ ВРЕМЯ", "ok");
+    } else if (res.status === 429) {
+      setStatus("СЛИШКОМ МНОГО ПОПЫТОК — ПОДОЖДИТЕ МИНУТУ ИЛИ ПОЗВОНИТЕ НАМ", "err");
     } else {
-      status.className = "form-status err";
-      status.textContent = "Проверьте имя и телефон и попробуйте ещё раз.";
+      setStatus("ПРОВЕРЬТЕ ИМЯ И ТЕЛЕФОН И ПОПРОБУЙТЕ ЕЩЁ РАЗ", "err");
     }
   } catch {
-    status.className = "form-status err";
-    status.textContent = "Не удалось отправить. Попробуйте позже или напишите в Telegram.";
+    setStatus("НЕ УДАЛОСЬ ОТПРАВИТЬ — ПОЗВОНИТЕ НАМ ИЛИ НАПИШИТЕ В TELEGRAM", "err");
   } finally {
     button.disabled = false;
   }
 });
 
+// Один вопрос открыт за раз — лист вопросов остаётся коротким.
+const items = document.querySelectorAll(".faq-item");
+items.forEach((item) => {
+  item.addEventListener("toggle", () => {
+    if (!item.open) return;
+    items.forEach((other) => {
+      if (other !== item) other.open = false;
+    });
+  });
+});
+
 // --- Cookie-согласие + отложенная загрузка Яндекс.Метрики (152-ФЗ) ---
-// Метрику грузим ТОЛЬКО после согласия пользователя. На превью счётчика нет —
+// Метрику грузим ТОЛЬКО после согласия пользователя. Пока счётчика нет —
 // при null загрузка пропускается, ошибок не будет.
 // TODO ЗАКАЗЧИК: подставить id счётчика Яндекс.Метрики (ТЗ §5.5).
 const YM_COUNTER_ID = null;
@@ -75,20 +79,27 @@ function loadMetrika() {
   window.ym(YM_COUNTER_ID, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true });
 }
 
+function readConsent() {
+  try { return localStorage.getItem(CONSENT_KEY); } catch { return null; }
+}
+
+function saveConsent(value) {
+  try { localStorage.setItem(CONSENT_KEY, value); } catch { /* приватный режим — спросим снова */ }
+  banner.hidden = true;
+}
+
 if (banner) {
-  const consent = localStorage.getItem(CONSENT_KEY);
+  const consent = readConsent();
   if (consent === "all") {
     loadMetrika();
   } else if (!consent) {
     banner.hidden = false;
   }
-  banner.querySelector("#cookie-accept")?.addEventListener("click", () => {
-    localStorage.setItem(CONSENT_KEY, "all");
-    banner.hidden = true;
+  banner.querySelector("#cookie-accept").addEventListener("click", () => {
+    saveConsent("all");
     loadMetrika();
   });
-  banner.querySelector("#cookie-decline")?.addEventListener("click", () => {
-    localStorage.setItem(CONSENT_KEY, "necessary");
-    banner.hidden = true;
+  banner.querySelector("#cookie-decline").addEventListener("click", () => {
+    saveConsent("necessary");
   });
 }
