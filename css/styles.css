@@ -1,11 +1,11 @@
 /* =========================================================================
-   Больше, чем бухгалтерия — лендинг, направление «Ведомость».
+   TAXBUH — ILIANOVA & PARTNERS, лендинг, направление «Ведомость».
    Идея: страница ведёт себя как бухгалтерский документ. Отсюда все решения:
    скруглений нет, тени нет ни у чего кроме карточки заявки, вместо карточек —
    линейки (2px открывает раздел, 1px делит строки), содержание нумеровано.
    Две гарнитуры: Golos Text — содержание, JetBrains Mono — служебные подписи.
    Цифры табличные, поэтому колонки выравниваются.
-   Оранжевый — действия и итоговые цифры. Бирюза — точечно. Тёмный блок один.
+   Терракота — действия и итоговые цифры. Шалфей — точечно. Тёмный блок один.
    ========================================================================= */
 
 /* ---------------- Шрифты: self-host, variable ----------------
@@ -33,26 +33,26 @@
 }
 
 :root {
-  /* Палитра camping (вариант 02). Исходные пять цветов из подборки заказчика:
-     #f36428 · #00b4b5 · #f0f0f0 · #3e4651 · #5c6d7f.
-     Яркий оранжевый #f36428 даёт на белом только 3.15:1 — этого хватает крупному
-     тексту, но не кнопке и не мелочи. Поэтому цвет действия затемнён до 4.54:1,
-     а исходный тон живёт в --accent-vivid: заголовок, крупные цифры, печать. */
-  --ink: #3e4651;            /* графит-сталь: текст и тёмные блоки */
-  --accent: #c75120;         /* действие: кнопки, ссылки, номера строк — AA 4.54 */
-  --accent-deep: #a74318;    /* наведение на кнопку */
-  --accent-vivid: #f36428;   /* только крупное: заголовок, итоговые цифры, печать */
-  --spot: #009a9b;           /* второй цвет, графика: точки, иконки */
-  --spot-ink: #06797a;       /* второй цвет, мелкий текст — AA 5.22 */
-  --spot-light: #4fd8d9;     /* второй цвет поверх тёмного блока — AA 5.53 */
-  --ok: #217f10;             /* «заявка отправлена», индикатор связи — AA 5.11 */
+  /* Тёплая палитра (по просьбе заказчицы 2026-11-10: «более тёплые и приятные цвета»).
+     Холодный графит и бирюза заменены: бумага — сливочная, текст — тёплый
+     «эспрессо», действие — терракота, второй цвет — мягкий шалфей.
+     Контраст на бумаге #fffaf3: accent 4.68, spot-ink 5.82, muted 6.25, ink 12.5.
+     --accent-vivid на бумаге 3.12:1 — только крупное: заголовок, итоговые цифры, печать. */
+  --ink: #3b2f28;            /* тёплый «эспрессо»: текст и тёмные блоки */
+  --accent: #b9531c;         /* терракота — действие: кнопки, ссылки, номера строк (AA 4.68) */
+  --accent-deep: #97410f;    /* наведение на кнопку */
+  --accent-vivid: #e8692a;   /* тёплый оранжевый — только крупное */
+  --spot: #7f8f4f;           /* шалфей — графика: точки, иконки */
+  --spot-ink: #58692f;       /* шалфей, мелкий текст — AA 5.82 */
+  --spot-light: #c8d79a;     /* шалфей поверх тёмного блока — 8.4 */
+  --ok: #3a7a1d;             /* «заявка отправлена», индикатор связи — AA 5.08 */
 
-  --paper: #ffffff;
-  --surface: #f0f0f0;
-  --muted: #5c6d7f;
-  --dim: #7c8695;
-  --faint: #98a2ad;
-  --line: #e3e3e3;
+  --paper: #fffaf3;
+  --surface: #f7efe4;
+  --muted: #6b5b4f;
+  --dim: #857466;
+  --faint: #a39384;
+  --line: #ecdfcf;
 
   --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
   --ease: cubic-bezier(0.2, 0, 0, 1);
@@ -128,7 +128,7 @@ a { color: inherit; text-decoration: none; }
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   padding: .75rem clamp(1.25rem, 5vw, 5.5rem);
-  background: rgba(255,255,255,.92); backdrop-filter: blur(8px);
+  background: rgba(255,250,243,.92); backdrop-filter: blur(8px);
   border-bottom: 2px solid var(--ink);
 }
 .brand { display: flex; align-items: baseline; gap: .9rem; }
@@ -140,7 +140,11 @@ a { color: inherit; text-decoration: none; }
 /* ---------------- Лист 1: первый экран ---------------- */
 .hero { padding: clamp(2.25rem, 6vw, 3.4rem) 0 clamp(2.5rem, 7vw, 4rem); }
 .hero-inner { width: min(1264px, 100% - 2.5rem); margin-inline: auto; display: grid; gap: 2.5rem; }
-.hero-title { margin-top: 1.4rem; font-size: clamp(2.5rem, 8.5vw, 4.1rem); font-weight: 800; }
+.hero-kicker { display: grid; gap: .45rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
+.hero-kicker .sheet { color: var(--accent); }
+.kicker-line { font-size: clamp(.98rem, 2.4vw, 1.1rem); font-weight: 700; letter-spacing: -.01em; }
+.hero-title { margin-top: 1.4rem; font-size: clamp(1.95rem, 5.6vw, 3.15rem); font-weight: 800; line-height: 1.08; }
+.hero-by { display: block; margin-top: .8rem; font-size: .42em; font-weight: 600; letter-spacing: 0; line-height: 1.4; color: var(--muted); }
 .hl { color: var(--accent-vivid); }
 .hero-sub { margin-top: 1.3rem; max-width: 46ch; font-size: clamp(1rem, 2.4vw, 1.13rem); line-height: 1.7; color: var(--muted); }
 
@@ -179,7 +183,8 @@ a { color: inherit; text-decoration: none; }
 /* ---------------- Лист 2: боли ---------------- */
 .pain .sheet-head { padding-top: 1.4rem; border-top: 2px solid var(--ink); }
 .pain-inner { display: grid; gap: 1.25rem; margin-top: 1.6rem; }
-.pain-q { font-size: clamp(1.35rem, 4.2vw, 2.06rem); font-weight: 600; line-height: 1.32; }
+.pain-q { margin-top: 1rem; max-width: 40ch; font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 600; line-height: 1.45; }
+.pain .btn { margin-top: 1.6rem; }
 .pain-a { font-size: clamp(1.75rem, 6vw, 2.75rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.06; color: var(--accent-vivid); }
 
 /* ---------------- Строки ведомости ---------------- */
@@ -202,9 +207,11 @@ a { color: inherit; text-decoration: none; }
 .rows-services .row-no { grid-column: 1; grid-row: 1; }
 .rows-services .row-name { grid-column: 2; font-size: 1.13rem; font-weight: 700; letter-spacing: -.02em; }
 .rows-services .row-desc { grid-column: 2; font-size: .97rem; line-height: 1.55; color: var(--muted); }
+.row-cta { display: block; margin-top: .45rem; font-weight: 700; color: var(--accent); }
 .rows-services .row-tag { grid-column: 2; font-size: .64rem; letter-spacing: .08em; color: var(--faint); }
 
 .rows-steps li { grid-template-columns: 34px 1fr; gap: 0 1rem; align-items: baseline; }
+.steps-head { padding-bottom: .8rem; border-bottom: 1px solid var(--line); }
 
 .after-table { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.6rem; margin-top: 1.8rem; }
 
@@ -220,22 +227,19 @@ a { color: inherit; text-decoration: none; }
 #abroad .sheet-note { color: rgba(255,255,255,.5); }
 .abroad-list .list-head { padding-bottom: .8rem; border-bottom: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.45); }
 .abroad-list ul { margin-bottom: 1.15rem; }
+#abroad .lead + .lead { margin-top: .8rem; }
 .abroad-list li {
   display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
   padding: .95rem 0; border-bottom: 1px solid rgba(255,255,255,.14);
   font-size: 1.06rem; font-weight: 600;
 }
-.online { font-size: .66rem; letter-spacing: .08em; color: var(--spot-ink); }
+.online { font-size: .66rem; letter-spacing: .08em; color: var(--spot-light); }
 
 /* ---------------- Лист 6: о нас ---------------- */
 .trust-inner { display: grid; gap: 2.4rem; }
-.ledger li { display: flex; align-items: baseline; gap: .9rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
-.ledger-cap { flex: none; max-width: 12.5rem; font-size: .66rem; letter-spacing: .1em; line-height: 1.7; color: var(--dim); }
-.leader {
-  flex: 1; height: 1px; align-self: flex-end; margin-bottom: .55rem;
-  background: repeating-linear-gradient(to right, #dfe2e6 0 2px, transparent 2px 6px);
-}
-.ledger-val { flex: none; font-size: clamp(1.5rem, 5vw, 2.5rem); font-weight: 800; letter-spacing: -.04em; }
+.ledger li { display: grid; grid-template-columns: minmax(6.5rem, 8.5rem) 1fr; gap: 1.1rem; align-items: baseline; padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
+.ledger-val { font-size: clamp(1.45rem, 4.2vw, 2.1rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; }
+.ledger-text { font-size: 1rem; line-height: 1.55; color: var(--muted); }
 .trust-lead { font-size: 1.19rem; line-height: 1.66; }
 .channels { display: flex; align-items: center; gap: .7rem; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: .66rem; letter-spacing: .1em; color: var(--dim); }
 .dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--spot); }
@@ -251,6 +255,19 @@ a { color: inherit; text-decoration: none; }
 .photo-slot a { display: block; width: 100%; height: 100%; }
 .photo-strip .photo-slot img { object-fit: contain; padding: .5rem; }
 .photo-cap { display: flex; gap: .75rem; margin-top: .6rem; font-size: .66rem; letter-spacing: .08em; color: var(--faint); }
+
+/* ---------------- Иллюстрации к разделам ----------------
+   Фото — «вклеенный» лист: тонкая рамка, без скруглений и теней, подпись моно
+   «ИЛЛ. N». Исходники ~600px, поэтому шире 600px не растягиваем. */
+.ill { margin: 0; max-width: 600px; }
+.ill img { display: block; width: 100%; height: auto; border: 1px solid var(--line); background: var(--surface); }
+.ill figcaption { margin-top: .55rem; font-size: .62rem; letter-spacing: .1em; color: var(--faint); }
+.startup-inner .ill, .trust-copy .ill { margin-top: 2rem; }
+.ill-dark { margin-bottom: 1.6rem; }
+.ill-dark img { border-color: rgba(255,255,255,.2); }
+#abroad .ill figcaption { color: rgba(255,255,255,.5); }
+.ill-head { width: 100%; }
+.faq-layout { display: grid; gap: 2rem; }
 
 /* ---------------- Лист 7: вопросы ---------------- */
 .faq-list { margin-top: .5rem; }
@@ -271,6 +288,7 @@ a { color: inherit; text-decoration: none; }
 .faq-item[open] summary .row-no { color: var(--accent); }
 .faq-item .row-no { color: var(--faint); }
 .faq-body { padding: 0 0 1.3rem 2.15rem; }
+.faq-body p + p { margin-top: .7rem; }
 .faq-body p { max-width: 88ch; font-size: .97rem; line-height: 1.68; color: var(--muted); }
 .faq-after { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.15rem; margin-top: 1.7rem; }
 
@@ -285,7 +303,7 @@ a { color: inherit; text-decoration: none; }
   display: grid; gap: 2rem;
   padding: clamp(1.5rem, 4.5vw, 2.75rem);
   background: var(--paper);
-  box-shadow: 0 2px 6px rgba(243,100,40,.10), 0 18px 40px rgba(62,70,81,.14);
+  box-shadow: 0 2px 6px rgba(232,105,42,.10), 0 18px 40px rgba(59,47,40,.14);
 }
 .blank-row { display: grid; gap: 2rem; }
 .field { display: grid; gap: .6rem; }
@@ -315,7 +333,8 @@ a { color: inherit; text-decoration: none; }
 /* ---------------- Подвал ---------------- */
 .footer { background: var(--ink); color: #fff; padding: clamp(2.5rem, 6vw, 3.5rem) 0 2.5rem; }
 .footer-grid { display: grid; gap: 2rem; padding-bottom: 1.9rem; border-bottom: 1px solid rgba(255,255,255,.18); }
-.footer-slogan { font-weight: 800; font-size: 1.4rem; letter-spacing: -.03em; }
+.footer-brand { font-size: .7rem; letter-spacing: .14em; color: var(--spot-light); }
+.footer-slogan { margin-top: .6rem; max-width: 26ch; font-weight: 800; font-size: 1.4rem; line-height: 1.25; letter-spacing: -.03em; }
 .footer-sub { margin-top: .75rem; font-size: .66rem; letter-spacing: .1em; line-height: 1.9; color: rgba(255,255,255,.55); }
 .footer-grid .list-head { color: rgba(255,255,255,.45); }
 .footer-grid a, .footer-grid span { display: block; margin-top: .45rem; font-size: 1rem; font-weight: 700; }
@@ -343,7 +362,7 @@ a { color: inherit; text-decoration: none; }
   display: flex; flex-wrap: wrap; align-items: center; gap: .9rem 1.4rem;
   padding: 1.1rem 1.3rem;
   background: var(--paper); border-top: 2px solid var(--ink);
-  box-shadow: 0 18px 40px rgba(62,70,81,.18);
+  box-shadow: 0 18px 40px rgba(59,47,40,.18);
 }
 .cookie[hidden] { display: none; }
 .cookie-text { flex: 1 1 280px; font-size: .9rem; line-height: 1.55; color: var(--muted); }
@@ -368,7 +387,8 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------------- Планшет ---------------- */
 @media (min-width: 760px) {
-  .pain-inner { grid-template-columns: 1fr 380px; gap: 3.5rem; align-items: end; }
+  .pain-inner { grid-template-columns: 1fr 380px; gap: 3.5rem; align-items: center; }
+  #services .sheet-head { display: grid; grid-template-columns: 1fr 340px; align-items: end; }
   .startup-inner { grid-template-columns: 380px 1fr; gap: 4.5rem; }
   .abroad-inner { grid-template-columns: 1fr 340px; gap: 3.5rem; }
   .trust-inner { grid-template-columns: 1fr 1fr; gap: 4.5rem; }
@@ -384,6 +404,9 @@ a { color: inherit; text-decoration: none; }
 /* ---------------- Десктоп: ведомость раскрывается в колонки ---------------- */
 @media (min-width: 1040px) {
   .hero-inner { grid-template-columns: 1fr 420px; gap: 4.5rem; }
+  .faq-layout { grid-template-columns: 1fr 340px; gap: 3.5rem; align-items: start; }
+  .ill-aside { position: sticky; top: 6rem; margin-top: 1.2rem; }
+  #services .sheet-head { grid-template-columns: 1fr 420px; }
   .table-head { display: grid; grid-template-columns: 46px 340px minmax(0, 1fr) 150px; gap: 0 1.75rem; }
   .rows-services li { grid-template-columns: 46px 340px minmax(0, 1fr) 150px; gap: 0 1.75rem; padding: 1.2rem 0; }
   .rows-services .row-name { grid-column: 2; grid-row: 1; font-size: 1.19rem; }
