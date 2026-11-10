@@ -215,6 +215,7 @@ a { color: inherit; text-decoration: none; }
 .rows-services .row-name { grid-column: 2; font-size: 1.13rem; font-weight: 700; letter-spacing: -.02em; }
 .rows-services .row-desc { grid-column: 2; font-size: .97rem; line-height: 1.55; color: var(--muted); }
 .row-cta { display: block; margin-top: .45rem; font-weight: 700; color: var(--accent); }
+.rows-services .row-ill { grid-column: 2; max-width: 420px; margin: .6rem 0 .3rem; }
 .rows-services .row-tag { grid-column: 2; font-size: .64rem; letter-spacing: .08em; color: var(--faint); }
 
 .rows-steps li { grid-template-columns: 34px 1fr; gap: 0 1rem; align-items: baseline; }
