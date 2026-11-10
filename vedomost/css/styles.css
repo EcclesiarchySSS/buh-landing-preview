@@ -178,11 +178,12 @@ a { color: inherit; text-decoration: none; }
 }
 /* Печать заходит на фото: белая подложка, иначе оранжевый теряется на снимке. */
 .stamp-bg { fill: var(--paper); }
-/* Печать на иллюстрации: поверх нижнего правого угла фото. */
-.ill-stamped { position: relative; }
-.ill-stamped .stamp-ill {
-  position: absolute; right: .8rem; bottom: 2.3rem; margin: 0;
-  width: clamp(104px, 26vw, 136px); transform: rotate(-11deg);
+/* Фото эксперта в блоке заявки с печатью в нижнем углу. */
+.expert-photo { position: relative; margin: 2.2rem 0 0; width: min(100%, 300px); }
+.expert-photo img { display: block; width: 100%; height: auto; border: 1px solid var(--line); background: var(--surface); }
+.expert-photo .stamp-ill {
+  position: absolute; right: -.8rem; bottom: -1.6rem; margin: 0;
+  width: clamp(104px, 28vw, 136px); transform: rotate(-11deg);
 }
 .hero-geo { margin-top: 2.2rem; font-size: .66rem; letter-spacing: .08em; line-height: 2; color: var(--faint); }
 
