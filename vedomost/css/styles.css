@@ -228,13 +228,14 @@ a { color: inherit; text-decoration: none; }
 /* ---------------- Лист 4: старт бизнеса ---------------- */
 .ill-open { max-width: none; margin-top: 1.8rem; }
 .ill-open img { aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 45%; border-color: var(--ink); background: #111; }
-@media (min-width: 760px) { .ill-open img { aspect-ratio: 21 / 7; } }
+@media (min-width: 760px) { .ill-open { max-width: 520px; } .ill-open img { aspect-ratio: auto; } }
 .startup-inner { display: grid; gap: 2.4rem; margin-top: 2.2rem; }
 .startup-inner .btn { margin-top: 1.6rem; }
 
 /* ---------------- Лист 5: зарубеж (единственный тёмный блок) ---------------- */
 #abroad .container { background: var(--ink); color: #fff; padding: clamp(2rem, 5vw, 3.25rem) clamp(1.4rem, 4vw, 3.75rem); }
-.abroad-clock { width: min(100%, 340px); margin-bottom: 2.4rem; }
+#abroad .abroad-clock { width: 100%; max-width: 340px; margin: 0; }
+#abroad .abroad-ob { max-width: 420px; margin: 2rem 0 0; }
 .abroad-inner { display: grid; gap: 2.4rem; }
 #abroad .sheet { color: rgba(255,255,255,.5); }
 #abroad .lead { color: rgba(255,255,255,.74); }
@@ -405,7 +406,10 @@ a { color: inherit; text-decoration: none; }
     .pain-inner { grid-template-columns: 1fr 380px; gap: 3.5rem; align-items: center; }
   #services .sheet-head { display: grid; grid-template-columns: 1fr 340px; align-items: end; }
   .startup-inner { grid-template-columns: 380px 1fr; gap: 4.5rem; }
-  .abroad-inner { grid-template-columns: 1fr 340px; gap: 3.5rem; }
+  .abroad-inner { grid-template-columns: 1fr 340px; gap: 2.4rem 3.5rem; align-items: start; }
+  .abroad-clock { grid-column: 2; grid-row: 1; max-width: none; }
+  .abroad-inner > div:not(.abroad-list) { grid-column: 1; grid-row: 1 / span 2; }
+  .abroad-list { grid-column: 2; grid-row: 2; }
   .trust-inner { grid-template-columns: 1fr 1fr; gap: 4.5rem; }
   .lead-inner { grid-template-columns: 380px 1fr; gap: 4.5rem; }
   .blank-row { grid-template-columns: 1fr 1fr; }
