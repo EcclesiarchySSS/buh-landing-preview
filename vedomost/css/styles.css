@@ -453,3 +453,9 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 900px) {
   .lawyer-inner { grid-template-columns: 1fr 380px; gap: 3.5rem; align-items: start; }
 }
+
+/* Мобильная шлифовка: кнопка юриста по центру, меньше пустоты под ней */
+@media (max-width: 599px) {
+  .lawyer-offer .btn { display: block; text-align: center; padding-left: 1rem; padding-right: 1rem; }
+  #lawyer { padding-bottom: 1.4rem; }
+}
